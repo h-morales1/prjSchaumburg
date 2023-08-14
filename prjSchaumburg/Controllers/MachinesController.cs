@@ -36,10 +36,46 @@ namespace prjSchaumburg.Controllers
                     Model = machine.Model,
                     Year = machine.Year
                 };
-                return View(viewModel);
+                return await Task.Run(() => View("View", viewModel));
             }
  
 
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> View(UpdateMachineViewModel modelMachine) // handle updating machines details
+        {
+            var machine = await mVCDbContext.Machines.FindAsync(modelMachine.Id);
+
+            if(machine != null)
+            {
+                // machine is not null so update its attributes
+                machine.Make = modelMachine.Make;
+                machine.Model = modelMachine.Model;
+                machine.Year = modelMachine.Year;
+
+                await mVCDbContext.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(UpdateMachineViewModel modelMachine) // handle deleting the machine
+        {
+            var machine = await mVCDbContext.Machines.FindAsync(modelMachine.Id);
+
+            if(machine != null)
+            {
+                //if not null then delete from table
+                mVCDbContext.Machines.Remove(machine);
+                await mVCDbContext.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
             return RedirectToAction("Index");
         }
 
@@ -64,7 +100,7 @@ namespace prjSchaumburg.Controllers
 
             await mVCDbContext.Machines.AddAsync(machine); // add obj to table
             await mVCDbContext.SaveChangesAsync(); // commit changes to table
-            return RedirectToAction("Add"); // redirect or reload page 
+            return RedirectToAction("Index"); // redirect to main page
         }
     }
 }
