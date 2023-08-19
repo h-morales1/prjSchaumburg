@@ -1,0 +1,31 @@
+﻿@model prjSchaumburg.Models.AddComponentViewModel
+
+
+@{
+}
+
+
+<h1>Add Component</h1>
+<form method="post" action="Add" class="mt-5">
+    <div class="mb-3">
+        <label for="" class="form-label">Machine Id</label>
+        <input type="text" class="form-control" asp-for="machineID" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Name</label>
+        <input type="text" class="form-control" asp-for="Name">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Serial number</label>
+        <input type="text" class="form-control" asp-for="serialNum">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Price</label>
+        <input type="number" class="form-control" asp-for="price">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Quantity</label>
+        <input type="number" class="form-control" asp-for="quantity">
+    </div>
+    <button type="submit" class="btn btn-primary" asp-action="AddSubmit" asp-controller="Components">Submit</button>
+</form>

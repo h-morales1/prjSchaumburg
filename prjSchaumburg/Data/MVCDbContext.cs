@@ -11,5 +11,6 @@ namespace prjSchaumburg.Data
 
 
         public DbSet<Machine> Machines { get; set; }
+        public DbSet<Component> Components { get; set; }
     }
 }
