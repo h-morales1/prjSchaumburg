@@ -1,0 +1,33 @@
+﻿@model prjSchaumburg.Models.UpdateComponentViewModel
+
+
+@{
+}
+
+<h1>Edit Component</h1>
+<form method="post" action="View" class="mt-5">
+    <div class="mb-3">
+        <label for="" class="form-label">Id</label>
+        <input type="text" class="form-control" asp-for="Id" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Machine Id</label>
+        <input type="text" class="form-control" asp-for="machineID" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Name</label>
+        <input type="text" class="form-control" asp-for="Name">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Serial Number</label>
+        <input type="number" class="form-control" asp-for="serialNum">
+    </div>
+    <div class="mb-3">
+        <label for="" class="form-label">Price</label>
+        <input type="number" class="form-control" asp-for="price">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+    <button type="submit" class="btn btn-danger" asp-action="Delete" asp-controller="Components">Delete</button>
+   
+</form>

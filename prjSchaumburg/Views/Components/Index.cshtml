@@ -1,0 +1,44 @@
+﻿@model prjSchaumburg.Models.ViewComponentsModel
+@{
+}
+
+<h1>Machines</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th> </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var machine in Model.Machines)
+        {
+            <tr>
+                <td>@machine.Id</td>
+                <td>@machine.Make</td>
+                <td>@machine.Model</td>
+                <td>@machine.Year.ToString()</td>
+            </tr>
+            <tr>
+                
+                @foreach(var component in Model.Components)
+                {
+                    @if (component.machineID == machine.Id)
+                    {
+                        <td>@component.Name</td>
+                       
+                        <td><a href="@Url.Action("View", "Components", new { compId = component.Id })">View</a></td>
+                    }
+                    
+                }
+     
+            </tr>
+        }
+    </tbody>
+
+</table>
