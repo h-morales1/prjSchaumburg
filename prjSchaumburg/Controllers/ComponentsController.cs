@@ -131,5 +131,23 @@ namespace prjSchaumburg.Controllers
             return RedirectToAction("Index");
 
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(UpdateComponentViewModel modelComponent)
+        {
+            // handle deleting a component
+            var component = await mVCDbContext.Components.FindAsync(modelComponent.Id);
+
+            if(component != null)
+            {
+                //if component is found, delete it from table
+                mVCDbContext.Components.Remove(component);
+                await mVCDbContext.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }
