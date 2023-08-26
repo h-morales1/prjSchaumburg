@@ -106,5 +106,30 @@ namespace prjSchaumburg.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> View(UpdateComponentViewModel modelComponent)
+        {
+            //var machine = await mVCDbContext.Machines.FindAsync(modelComponent.machineID);
+
+            //now perform check to see if component exists for this machine
+            var component = await mVCDbContext.Components.FindAsync(modelComponent.Id);
+
+            // component exists
+            if (component != null)
+            {
+                // update component with data from form
+                component.Name = modelComponent.Name;
+                component.serialNum = modelComponent.serialNum;
+                component.price = modelComponent.price;
+                component.quantity = modelComponent.quantity;
+
+                await mVCDbContext.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
+
+        }
     }
 }
